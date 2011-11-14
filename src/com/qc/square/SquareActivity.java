@@ -103,7 +103,7 @@ public class SquareActivity extends ListActivity {
                     @Override
                     public void onClick(View v) {
                         Util.launchNativeApp((Activity) context,
-                                "com.qc/com.qc.imageswitcher.ImageSwitcherA",
+                                "com.qc/com.qc.imageswitcher.PollImageSwitcher",
                                 createBundleForPollImages(position, 0));
                     }
                 });
@@ -111,7 +111,7 @@ public class SquareActivity extends ListActivity {
                     @Override
                     public void onClick(View v) {
                         Util.launchNativeApp((Activity) context,
-                                "com.qc/com.qc.imageswitcher.ImageSwitcherA",
+                                "com.qc/com.qc.imageswitcher.PollImageSwitcher",
                                 createBundleForPollImages(position, 1));
                     }
                 });

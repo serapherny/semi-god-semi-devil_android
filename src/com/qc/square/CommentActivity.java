@@ -108,22 +108,6 @@ public class CommentActivity extends ListActivity {
                         .findViewById(R.id.cmnt_comment_content);
                 holder.replyButton = (Button) convertView.findViewById(R.id.reply_button);
 
-                /*
-                 * holder.pollImg1.setOnClickListener(new OnClickListener() {
-                 *
-                 * @Override public void onClick(View v) {
-                 * Util.launchNativeApp((Activity) context,
-                 * "com.qc/com.qc.imageswitcher.ImageSwitcherA",
-                 * createBundle(position, 0)); } });
-                 *
-                 * holder.pollImg2.setOnClickListener(new OnClickListener() {
-                 *
-                 * @Override public void onClick(View v) {
-                 * Util.launchNativeApp((Activity) context,
-                 * "com.qc/com.qc.imageswitcher.ImageSwitcherA",
-                 * createBundle(position, 1)); } });
-                 */
-
                 convertView.setTag(holder);
             } else {
                 // Get the ViewHolder back to get fast access to the TextView
@@ -135,8 +119,6 @@ public class CommentActivity extends ListActivity {
             holder.commentUserIcon.setImageResource(comments[position].getUserIcon());
             holder.commentUserName.setText(comments[position].getUsername());
             holder.commentContent.setText(comments[position].getComment());
-
-            // Util.setListViewHeightBasedOnChildren(listView);
 
             return convertView;
         }

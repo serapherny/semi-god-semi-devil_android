@@ -24,7 +24,7 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 import com.qc.R;
 
-public class ImageSwitcherA extends Activity implements OnItemSelectedListener, ViewFactory,
+public class PollImageSwitcher extends Activity implements OnItemSelectedListener, ViewFactory,
         OnClickListener {
 
     private static final int SWIPE_MIN_DISTANCE = 120;
@@ -68,7 +68,7 @@ public class ImageSwitcherA extends Activity implements OnItemSelectedListener, 
         switcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_out));
 
         // delete the swipe action
-        switcher.setOnClickListener(ImageSwitcherA.this);
+        switcher.setOnClickListener(PollImageSwitcher.this);
         switcher.setOnTouchListener(gestureListener);
 
         Gallery g = (Gallery) findViewById(R.id.gallery);
@@ -134,17 +134,19 @@ public class ImageSwitcherA extends Activity implements OnItemSelectedListener, 
                 if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     if (index < mImageIds.length - 1) {
-                        ++index;
-                        switcher.setImageResource(mImageIds[index]);
-                        gallery.setSelection(index);
+                        // TEMPRORAY disable the swipe gesture
+                        // ++index;
+                        // switcher.setImageResource(mImageIds[index]);
+                        // gallery.setSelection(index);
                     }
 
                 } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     if (index > 0) {
-                        --index;
-                        switcher.setImageResource(mImageIds[index]);
-                        gallery.setSelection(index);
+                        // TEMPRORAY disable the swipe gesture
+                        // --index;
+                        // switcher.setImageResource(mImageIds[index]);
+                        // gallery.setSelection(index);
                     }
                 }
             } catch (Exception e) {
