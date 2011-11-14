@@ -9,11 +9,12 @@
 
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:orientation="horizontal" android:gravity="center" android:paddingBottom="10px">
+			android:orientation="horizontal" android:gravity="center"
+			android:paddingBottom="10px">
 			<Button android:id="@+id/square_all" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="所有评价" />
+				android:layout_height="34dp" android:text="所有评价" />
 			<Button android:id="@+id/square_mine" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="与我相关" />
+				android:layout_height="34dp" android:text="与我相关" />
 		</LinearLayout>
 
 		<ListView android:layout_height="fill_parent"

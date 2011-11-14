@@ -1,12 +1,12 @@
 package com.qc;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -21,7 +21,6 @@ public class SquareActivity extends ListActivity {
 
     private EfficientAdapter adap;
     private static String[] data = new String[] { "0", "1", "2" };
-
     private static Integer[] postUserIcons = new Integer[] { R.drawable.ouyang, R.drawable.qc,
             R.drawable.rc };
     private static String[] postUserNames = new String[] { "Ouyang", "Chao Qin", "Chao Ruan" };
@@ -31,7 +30,6 @@ public class SquareActivity extends ListActivity {
     private static String[] commentUserNames = new String[] { "Hu Shuishui", "Shao Zhen",
             "Song Shuo" };
     private static String[] commentContents = new String[] { "牛必", "尼玛", "还不错喔！" };
-
     private static Integer[] postPollImages1 = new Integer[] { R.drawable.bag1, R.drawable.full1,
             R.drawable.chanel1 };
     private static Integer[] postPollImages2 = new Integer[] { R.drawable.bag2, R.drawable.full2,
@@ -100,26 +98,25 @@ public class SquareActivity extends ListActivity {
                  *
                  * @Override public void onClick(View v) {
                  * Toast.makeText(context, "Click-" + String.valueOf(pos),
-                 * Toast.LENGTH_SHORT).show(); } });
-                 *
-                 * holder.buttonLine.setOnClickListener(new OnClickListener() {
-                 * private int pos = position;
-                 *
-                 * @Override public void onClick(View v) {
-                 * Toast.makeText(context, "Delete-" + String.valueOf(pos),
-                 * Toast.LENGTH_SHORT).show();
-                 *
-                 * } });
-                 *
-                 * holder.DbuttonLine.setOnClickListener(new OnClickListener() {
-                 * private int pos = position;
-                 *
-                 * @Override public void onClick(View v) {
-                 * Toast.makeText(context, "Details-" + String.valueOf(pos),
-                 * Toast.LENGTH_SHORT).show();
-                 *
-                 * } });
+                 * Toast.LENGTH_SHORT) .show(); } });
                  */
+                holder.pollImg1.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Util.launchNativeApp((Activity) context,
+                                "com.qc/com.qc.imageswitcher.ImageSwitcherA",
+                                createBundle(position, 0));
+                    }
+                });
+
+                holder.pollImg2.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Util.launchNativeApp((Activity) context,
+                                "com.qc/com.qc.imageswitcher.ImageSwitcherA",
+                                createBundle(position, 1));
+                    }
+                });
 
                 convertView.setTag(holder);
             } else {
@@ -141,6 +138,14 @@ public class SquareActivity extends ListActivity {
             holder.commentContent.setText(commentContents[position]);
 
             return convertView;
+        }
+
+        static private Bundle createBundle(int position, int currentIndex) {
+            Bundle bundle = new Bundle();
+            bundle.putIntArray("imageIds", new int[] { postPollImages1[position],
+                    postPollImages2[position] });
+            bundle.putInt("index", currentIndex);
+            return bundle;
         }
 
         static class ViewHolder {
