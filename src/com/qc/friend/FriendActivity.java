@@ -1,4 +1,4 @@
-package com.qc;
+package com.qc.friend;
 
 import android.app.Activity;
 import android.os.Bundle;

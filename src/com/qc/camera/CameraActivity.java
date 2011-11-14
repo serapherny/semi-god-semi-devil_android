@@ -1,4 +1,4 @@
-package com.qc;
+package com.qc.camera;
 
 import android.app.Activity;
 import android.os.Bundle;

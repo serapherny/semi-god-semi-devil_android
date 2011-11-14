@@ -1,4 +1,10 @@
-package com.qc;
+package com.qc.square;
+
+import com.qc.R;
+import com.qc.Util;
+import com.qc.R.drawable;
+import com.qc.R.id;
+import com.qc.R.layout;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -73,11 +79,11 @@ public class SquareActivity extends ListActivity {
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.square_list_cell, null);
 
-                // Creates a ViewHolder and store references to the two children
-                // views
-                // we want to bind data to.
+                // create the view holder (it is must-have panel controller for
+                // list view)
                 holder = new ViewHolder();
 
+                // set up the components in list cell
                 holder.postUserIcon = (ImageView) convertView.findViewById(R.id.post_user_icon);
                 holder.postUserName = (TextView) convertView.findViewById(R.id.post_user_name);
 
@@ -92,29 +98,31 @@ public class SquareActivity extends ListActivity {
                 holder.moreCommentButton = (Button) convertView
                         .findViewById(R.id.more_comment_button);
 
-                /*
-                 * convertView.setOnClickListener(new OnClickListener() {
-                 * private int pos = position;
-                 *
-                 * @Override public void onClick(View v) {
-                 * Toast.makeText(context, "Click-" + String.valueOf(pos),
-                 * Toast.LENGTH_SHORT) .show(); } });
-                 */
+                // click listener for poll images
                 holder.pollImg1.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Util.launchNativeApp((Activity) context,
                                 "com.qc/com.qc.imageswitcher.ImageSwitcherA",
-                                createBundle(position, 0));
+                                createBundleForPollImages(position, 0));
                     }
                 });
-
                 holder.pollImg2.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Util.launchNativeApp((Activity) context,
                                 "com.qc/com.qc.imageswitcher.ImageSwitcherA",
-                                createBundle(position, 1));
+                                createBundleForPollImages(position, 1));
+                    }
+                });
+
+                // click listener for more comment button
+                holder.moreCommentButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Util.launchNativeApp((Activity) context,
+                                "com.qc/com.qc.square.CommentActivity",
+                                createBundleForMoreComments(position, 1));
                     }
                 });
 
@@ -140,11 +148,21 @@ public class SquareActivity extends ListActivity {
             return convertView;
         }
 
-        static private Bundle createBundle(int position, int currentIndex) {
+        static private Bundle createBundleForPollImages(int position, int currentIndex) {
             Bundle bundle = new Bundle();
             bundle.putIntArray("imageIds", new int[] { postPollImages1[position],
                     postPollImages2[position] });
             bundle.putInt("index", currentIndex);
+            return bundle;
+        }
+
+        static private Bundle createBundleForMoreComments(int position, int currentIndex) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("cmnt_post_user_icon", postUserIcons[position]);
+            bundle.putString("cmnt_post_user_name", postUserNames[position]);
+            bundle.putString("cmnt_poll_desc", pollDescs[position]);
+            bundle.putInt("cmnt_poll_img1", postPollImages1[position]);
+            bundle.putInt("cmnt_poll_img2", postPollImages2[position]);
             return bundle;
         }
 

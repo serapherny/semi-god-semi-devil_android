@@ -1,5 +1,11 @@
 package com.qc;
 
+import com.qc.camera.CameraActivity;
+import com.qc.friend.FriendActivity;
+import com.qc.notification.NotificationActivity;
+import com.qc.profile.ProfileActivity;
+import com.qc.square.SquareActivity;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
