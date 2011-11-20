@@ -1,6 +1,8 @@
 package com.qc.profile;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +26,29 @@ public class ProfileActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("您还没注册，请问是否现在注册？").setCancelable(false)
+                .setPositiveButton("注册", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        displayLogin();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        displayError();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void displayError() {
+        TextView view = new TextView(this);
+        view.setText("此功能只适用于注册用户！");
+        setContentView(view);
+    }
+
+    public void displayLogin() {
         setContentView(R.layout.login);
 
         // Get the EditText and Button References

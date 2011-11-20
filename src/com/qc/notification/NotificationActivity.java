@@ -16,13 +16,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.qc.MockUtil;
 import com.qc.R;
 import com.qc.Util;
 import com.qc.entity.Notification;
-import com.qc.square.CommentActivity;
 
 public class NotificationActivity extends ListActivity {
 
