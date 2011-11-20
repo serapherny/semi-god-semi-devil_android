@@ -223,6 +223,7 @@ public class Kube extends Activity implements KubeRenderer.AnimationCallback {
         mView = new GLSurfaceView(getApplication());
         mRenderer = new KubeRenderer(makeGLWorld(), this);
         mView.setRenderer(mRenderer);
+        
         setContentView(mView);
     }
 
