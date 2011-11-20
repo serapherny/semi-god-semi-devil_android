@@ -6,13 +6,13 @@
 	android:gravity="center" android:paddingBottom="10px"
 	android:paddingTop="20px">
 
-	<Button android:id="@+id/mark_read_button" android:gravity="center"
+	<Button android:id="@+id/notification_mark_read_button" android:gravity="center"
 		android:layout_width="wrap_content" android:layout_marginRight="30px"
-		android:layout_alignParentRight="true" android:text="回复"
+		android:layout_alignParentRight="true" android:text="全部已读"
 		android:layout_height="34dp" />
 
-	<Button android:id="@+id/clear_button" android:gravity="center"
+	<Button android:id="@+id/clear_notification_button" android:gravity="center"
 		android:layout_width="wrap_content" android:layout_marginLeft="30px"
-		android:layout_alignParentRight="true" android:text="返回"
+		android:layout_alignParentRight="true" android:text="清空列表"
 		android:layout_height="34dp" />
 </LinearLayout>

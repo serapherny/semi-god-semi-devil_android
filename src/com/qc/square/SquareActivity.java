@@ -1,11 +1,5 @@
 package com.qc.square;
 
-import com.qc.R;
-import com.qc.Util;
-import com.qc.R.drawable;
-import com.qc.R.id;
-import com.qc.R.layout;
-
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
@@ -22,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.qc.R;
+import com.qc.Util;
 
 public class SquareActivity extends ListActivity {
 

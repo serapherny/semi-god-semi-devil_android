@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
 
-	<ImageSwitcher android:id="@+id/imgswitcher"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:layout_alignParentTop="true" android:layout_alignParentLeft="true" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical" android:layout_alignParentRight="true"
+	android:gravity="bottom">
 
-	<Gallery android:id="@+id/gallery" android:background="#55000000"
-		android:layout_width="fill_parent" android:layout_height="70dp"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentLeft="true" android:gravity="center_vertical"
-		android:spacing="30dp" />
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal" android:layout_alignParentRight="true"
+		android:gravity="center" android:layout_marginTop="20sp">
+		<Button android:id="@+id/poll_like_button" android:gravity="center"
+			android:layout_width="wrap_content" android:text="喜欢"
+			android:layout_height="34dp" />
+		<TextView android:layout_height="wrap_content"
+			android:textSize="20sp" android:text="宝贝评价" android:gravity="center"
+			android:textColor="#FFFFFF" android:layout_width="wrap_content"
+			android:layout_marginLeft="50sp" android:layout_marginRight="50sp" />
+		<Button android:id="@+id/poll_comment_button" android:gravity="center"
+			android:layout_width="wrap_content" android:text="留言"
+			android:layout_height="34dp" />
+	</LinearLayout>
 
-</RelativeLayout>
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+		<ImageSwitcher android:id="@+id/imgswitcher"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+			android:layout_marginBottom="30sp" />
+
+		<Gallery android:id="@+id/gallery" android:background="#55000000"
+			android:layout_width="fill_parent" android:layout_height="70dp"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentLeft="true" android:gravity="center_vertical"
+			android:spacing="30dp" />
+	</RelativeLayout>
+</LinearLayout>
+
+

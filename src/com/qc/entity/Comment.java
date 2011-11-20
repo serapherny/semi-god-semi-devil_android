@@ -1,17 +1,17 @@
 package com.qc.entity;
 
 public class Comment {
-    private int commentId;
+    private int id;
     private String username;
     private int userIcon;
     private String comment;
 
-    public int getCommentId() {
-        return commentId;
+    public int getId() {
+        return id;
     }
 
-    public void setCommentId(int commentId) {
-        this.commentId = commentId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

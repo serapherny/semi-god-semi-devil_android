@@ -1,10 +1,12 @@
 package com.qc.square;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -26,6 +28,7 @@ public class CommentActivity extends ListActivity {
     private EfficientAdapter adap;
     private Comment[] comments = MockUtil.getComments();
     private ListView listView = null;
+    private int[] images = null;
 
     /** Called when the activity is first created. */
     @Override
@@ -64,6 +67,37 @@ public class CommentActivity extends ListActivity {
 
         ImageView pollImg2 = (ImageView) findViewById(R.id.cmnt_poll_img2);
         pollImg2.setImageResource(payload.getInt("cmnt_poll_img2"));
+
+        images = new int[2];
+        images[0] = payload.getInt("cmnt_poll_img1");
+        images[1] = payload.getInt("cmnt_poll_img2");
+
+        pollImg1.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Util.launchNativeApp((Activity) CommentActivity.this,
+                        "com.qc/com.qc.imageswitcher.PollImageSwitcher",
+                        createBundleForPollImages(images, 0));
+            }
+        });
+
+        pollImg2.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Util.launchNativeApp((Activity) CommentActivity.this,
+                        "com.qc/com.qc.imageswitcher.PollImageSwitcher",
+                        createBundleForPollImages(images, 1));
+            }
+        });
+    }
+
+    private static Bundle createBundleForPollImages(int[] images, int currentIndex) {
+        Bundle bundle = new Bundle();
+        bundle.putIntArray("imageIds", images);
+        bundle.putInt("index", currentIndex);
+        return bundle;
     }
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -106,7 +140,7 @@ public class CommentActivity extends ListActivity {
                         .findViewById(R.id.cmnt_comment_user_name);
                 holder.commentContent = (TextView) convertView
                         .findViewById(R.id.cmnt_comment_content);
-                holder.replyButton = (Button) convertView.findViewById(R.id.reply_button);
+                holder.replyButton = (Button) convertView.findViewById(R.id.mark_read_button);
 
                 convertView.setTag(holder);
             } else {
