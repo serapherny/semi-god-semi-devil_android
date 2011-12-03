@@ -75,7 +75,6 @@ public class CameraActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(this, "photo taken ok", Toast.LENGTH_SHORT).show();
             } else if (resultCode == RESULT_CANCELED) {
-                SemiPrototypeActivity.setTab(2);
                 Toast.makeText(this, "Picture was not taken", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Picture was not taken", Toast.LENGTH_SHORT).show();
@@ -91,17 +90,6 @@ public class CameraActivity extends Activity {
                 ContentResolver cr = this.getContentResolver();
                 Log.i("photo, uri is ", data.getData().toString());
                 Log.i("scheme is", data.getData().getScheme());
-                // Cursor cursor = cr.query(data.getData(), null, null, null,
-                // null);
-                // cursor.moveToFirst();
-                // int idx = cursor.getColumnIndex(ImageColumns.DATA);
-                // String fileSrc = cursor.getString(idx);
-
-                // Bitmap bitmapPreview = BitmapFactory.decodeFile(fileSrc);
-                // BitmapDrawable bmpDrawable = new
-                // BitmapDrawable(bitmapPreview);
-                // imgTakenPhoto.setBackgroundDrawable(bmpDrawable);
-                // imgTakenPhoto.setImageBitmap(selectedImage );
                 imgTakenPhoto.setImageURI(data.getData());
 
             } else {
