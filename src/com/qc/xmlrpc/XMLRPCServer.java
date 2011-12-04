@@ -36,7 +36,7 @@ public class XMLRPCServer extends XMLRPCCommon {
 		InputStream inputStream = socket.getInputStream();
 
 		XmlPullParser pullParser = xmlPullParserFromSocket(inputStream);
-		
+
 		pullParser.nextTag();
 		pullParser.require(XmlPullParser.START_TAG, null, Tag.METHOD_CALL);
 		pullParser.nextTag();
@@ -47,7 +47,7 @@ public class XMLRPCServer extends XMLRPCCommon {
 		pullParser.nextTag();
 		pullParser.require(XmlPullParser.START_TAG, null, Tag.PARAMS);
 		pullParser.nextTag(); // <param>
-		
+
 		do {
 			//Log.d(Tag.LOG, "type=" + pullParser.getEventType() + ", tag=" + pullParser.getName());
 			pullParser.require(XmlPullParser.START_TAG, null, Tag.PARAM);
@@ -59,28 +59,28 @@ public class XMLRPCServer extends XMLRPCCommon {
 			pullParser.nextTag();
 			pullParser.require(XmlPullParser.END_TAG, null, Tag.PARAM);
 			pullParser.nextTag(); // <param> or </params>
-			
+
 		} while (!pullParser.getName().equals(Tag.PARAMS)); // </params>
 
 		return methodCall;
 	}
-	
+
 	XmlPullParser xmlPullParserFromSocket(InputStream socketInputStream) throws IOException, XmlPullParserException {
-	
+
 		String line, xmlRpcText = "";
 		BufferedReader br = new BufferedReader(new InputStreamReader(socketInputStream));
 		while ((line = br.readLine()) != null && line.length() > 0); // eat the HTTP POST headers
 		while (br.ready())
 			xmlRpcText = xmlRpcText + br.readLine();
 		// Log.d(Tag.LOG, "xml received:" + xmlRpcText);
-		
+
 		InputStream inputStream = new ByteArrayInputStream(xmlRpcText.getBytes("UTF-8"));
 		XmlPullParser pullParser = XmlPullParserFactory.newInstance().newPullParser();
 		Reader streamReader = new InputStreamReader(inputStream);
 		pullParser.setInput(streamReader);
 		return pullParser;
 	}
-	
+
 	public void respond(Socket socket, Object[] params) throws IOException {
 
 		String content = methodResponse(params);
@@ -92,19 +92,19 @@ public class XMLRPCServer extends XMLRPCCommon {
 		socket.close();
 		Log.d(Tag.LOG, "response:" + response);
 	}
-	
+
 	private String methodResponse(Object[] params)
 	throws IllegalArgumentException, IllegalStateException, IOException {
 		StringWriter bodyWriter = new StringWriter();
 		serializer.setOutput(bodyWriter);
 		serializer.startDocument(null, null);
 		serializer.startTag(null, Tag.METHOD_RESPONSE);
-		
+
 		serializeParams(params);
 
 		serializer.endTag(null, Tag.METHOD_RESPONSE);
 		serializer.endDocument();
-		
+
 		return bodyWriter.toString();
 	}
 }

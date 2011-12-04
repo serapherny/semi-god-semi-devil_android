@@ -1,12 +1,13 @@
 package com.qc.camera;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,11 +19,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.qc.R;
-import com.qc.SemiPrototypeActivity;
+import com.qc.Util;
 
 public class CameraActivity extends Activity {
     // define the file-name to save photo taken by Camera activity
     String fileName = "muzhigirl.jpg";
+    
     // create parameters for Intent with filename
     ContentValues values;
     Button buttonTakePhoto;
@@ -30,6 +32,20 @@ public class CameraActivity extends Activity {
     ImageView imgTakenPhoto;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 0;
     private static final int PICK_IMAGE_ACTIVITY_REQUESRT_CODE = 1;
+
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+        Util.clearImageResource(imgTakenPhoto);
+    }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        Util.clearImageResource(imgTakenPhoto);
+    }
 
     class buttonChoosePhotoClicker implements Button.OnClickListener {
         public void onClick(View v) {
@@ -83,44 +99,20 @@ public class CameraActivity extends Activity {
 
         case PICK_IMAGE_ACTIVITY_REQUESRT_CODE:
             if ((resultCode == RESULT_OK) && (data.getData() != null)) {
-                if (data != null) {
-                    Toast.makeText(this, "data not null", Toast.LENGTH_SHORT).show();
+                // resize the image size to 750 px (either width or height,
+                // whichever comes first)
+                Bitmap bitmap;
+                try {
+                    bitmap = Util.decodeFile(new File(new URI(data.getDataString())), 750);
+                    Log.i("photo size is ", "" + bitmap.getWidth() + " , " + bitmap.getHeight());
+                    imgTakenPhoto.setImageBitmap(bitmap);
+                } catch (URISyntaxException e) {
+                    Toast.makeText(this, "Unable to locate or decode the image you selected.",
+                            Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(this, "chosen", Toast.LENGTH_SHORT).show();
-                ContentResolver cr = this.getContentResolver();
-                Log.i("photo, uri is ", data.getData().toString());
-                Log.i("scheme is", data.getData().getScheme());
-                imgTakenPhoto.setImageURI(data.getData());
-
             } else {
-                Toast.makeText(this, "not chosen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Image not been selected!", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-    public static File convertImageUriToFile(Uri imageUri, Activity activity) {
-        Cursor cursor = null;
-        try {
-            String[] proj = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID,
-                    MediaStore.Images.ImageColumns.ORIENTATION };
-            cursor = activity.managedQuery(imageUri, proj, // Which columns to
-                                                           // return
-                    null, // WHERE clause; which rows to return (all rows)
-                    null, // WHERE clause selection arguments (none)
-                    null); // Order-by clause (ascending by name)
-            int file_ColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            int orientation_ColumnIndex = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.ImageColumns.ORIENTATION);
-            if (cursor.moveToFirst()) {
-                String orientation = cursor.getString(orientation_ColumnIndex);
-                return new File(cursor.getString(file_ColumnIndex));
-            }
-            return null;
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
-
 }
