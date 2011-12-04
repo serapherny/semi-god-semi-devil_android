@@ -25,16 +25,16 @@ public class SemiPrototypeActivity extends TabActivity {
         Resources res = getResources();
         TabHost tabHost = getTabHost();
 
-        this.addTabSpec(SquareActivity.class, tabHost, res, "square", getString(R.string.square),
-                R.drawable.ic_tab_artists);
-        this.addTabSpec(NotificationActivity.class, tabHost, res, "notifications",
-                getString(R.string.notification), R.drawable.ic_tab_artists);
-        this.addTabSpec(CameraActivity.class, tabHost, res, "camera", getString(R.string.camera),
-                R.drawable.ic_tab_artists);
-        this.addTabSpec(ProfileActivity.class, tabHost, res, "profile",
-                getString(R.string.profile), R.drawable.ic_tab_artists);
-        this.addTabSpec(FriendActivity.class, tabHost, res, "friends", getString(R.string.friends),
-                R.drawable.ic_tab_artists);
+        this.addTabSpec(SquareActivity.class, tabHost, res, "square", "",
+                R.drawable.guangchang_tab_icon);
+        this.addTabSpec(NotificationActivity.class, tabHost, res, "notifications", "",
+                R.drawable.tixing_tab_icon);
+        this.addTabSpec(CameraActivity.class, tabHost, res, "camera", "",
+                R.drawable.paizhao_tab_icon);
+        this.addTabSpec(ProfileActivity.class, tabHost, res, "profile", "",
+                R.drawable.wode_tab_icon);
+        this.addTabSpec(FriendActivity.class, tabHost, res, "friends", "",
+                R.drawable.dangyu_tab_icon);
 
         tabHost.setCurrentTab(2);
     }
@@ -43,7 +43,8 @@ public class SemiPrototypeActivity extends TabActivity {
             String indicator, int drawableId) {
         Intent intent = new Intent().setClass(this, cls);
         TabHost.TabSpec spec = tabHost.newTabSpec(name)
-                .setIndicator(indicator, res.getDrawable(drawableId)).setContent(intent);
+                .setIndicator(indicator, res.getDrawable(drawableId))
+                .setContent(intent);
         tabHost.addTab(spec);
     }
 

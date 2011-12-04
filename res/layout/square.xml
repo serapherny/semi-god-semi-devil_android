@@ -7,10 +7,9 @@
 		android:layout_width="fill_parent" android:layout_height="fill_parent"
 		android:orientation="vertical">
 
-		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:orientation="horizontal" android:gravity="center"
-			android:paddingBottom="10px">
+		<LinearLayout android:layout_width="fill_parent"
+			android:layout_height="40dp" android:orientation="horizontal"
+			android:gravity="center" android:background="@drawable/topbck">
 			<Button android:id="@+id/square_all" android:layout_width="wrap_content"
 				android:layout_height="34dp" android:text="所有评价" />
 			<Button android:id="@+id/square_mine" android:layout_width="wrap_content"

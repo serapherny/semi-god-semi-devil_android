@@ -1,44 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+	android:id="@+id/layout" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:orientation="vertical">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Camera Demo"
-        android:textSize="24sp" />
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="40dp" android:orientation="horizontal"
+		android:gravity="center" android:background="@drawable/topbck">
+		<Button android:id="@+id/buttonTakePhoto" android:layout_width="wrap_content"
+			android:layout_height="34dp" android:layout_gravity="center"
+			android:layout_marginRight="10sp" android:text="拍照上传">
+		</Button>
 
-    <FrameLayout
-        android:id="@+id/preview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1" >
-    </FrameLayout>
+		<Button android:id="@+id/buttonChoosePhoto"
+			android:layout_width="wrap_content" android:layout_height="34dp"
+			android:layout_marginLeft="10sp" android:layout_gravity="center"
+			android:text="从相册选">
+		</Button>
+	</LinearLayout>
 
-    <Button
-        android:id="@+id/buttonTakePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="新拍一张照片" >
-    </Button>
+	<FrameLayout android:id="@+id/preview"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_weight="1">
+	</FrameLayout>
 
-    <Button
-        android:id="@+id/buttonChoosePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="从相册中选择" >
-    </Button>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop">
-    </ImageView>
+	<ImageView android:id="@+id/imageView" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:scaleType="centerCrop">
+	</ImageView>
 
 </LinearLayout>

@@ -2,10 +2,5 @@
 <resources>
 	<string name="hello">Hello World, SemiPrototypeActivity!</string>
 	<string name="app_name">SemiPrototype</string>
-	<string name="square">广场</string>
-	<string name="notification">提醒</string>
-	<string name="camera">拍照</string>
-	<string name="profile">橱柜</string>
-	<string name="friends">朋友</string>
 	<string name="square_title">这里拥有各种宝贝的评价！！</string>
 </resources>

@@ -7,10 +7,9 @@
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:orientation="vertical">
 
-		<TextView android:layout_height="wrap_content"
-			android:textSize="20sp" android:text="消息列表" android:gravity="center"
-			android:textColor="#FFFFFF" android:layout_width="fill_parent"
-			android:layout_marginBottom="10sp" android:layout_marginTop="5sp" />
+		<TextView android:layout_height="35dp" android:textSize="20sp"
+			android:text="消息列表" android:gravity="center" android:textColor="#FFFFFF"
+			android:layout_width="fill_parent" android:background="@drawable/topbck" />
 
 		<ListView android:layout_height="fill_parent"
 			android:layout_width="fill_parent" android:drawSelectorOnTop="false"

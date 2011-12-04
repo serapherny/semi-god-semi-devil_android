@@ -18,7 +18,8 @@ public class FriendActivity extends Activity {
         setContentView(R.layout.friend);
 
         TextView textView = (TextView) findViewById(R.id.info);
-        textView.setText("和欧阳晓琪讨论，我总觉得按照其他经典app的布局和用户的习惯，我们总需要给用户一个可以设置基本的功能，查看产品信息还有login out的地方。");
+        textView.setText("还在做！！！");
+        textView.setTextSize(24);
 
         Button aboutButton = (Button) findViewById(R.id.about_button);
         aboutButton.setOnClickListener(new OnClickListener() {
