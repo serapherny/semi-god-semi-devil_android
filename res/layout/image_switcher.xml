@@ -5,21 +5,21 @@
 	android:orientation="vertical" android:layout_alignParentRight="true"
 	android:gravity="bottom">
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal" android:layout_alignParentRight="true"
-		android:gravity="center" android:layout_marginTop="20sp">
-		<Button android:id="@+id/poll_like_button" android:gravity="center"
-			android:layout_width="wrap_content" android:text="喜欢"
-			android:layout_height="34dp" />
-		<TextView android:layout_height="wrap_content"
-			android:textSize="20sp" android:text="宝贝评价" android:gravity="center"
-			android:textColor="#FFFFFF" android:layout_width="wrap_content"
-			android:layout_marginLeft="50sp" android:layout_marginRight="50sp" />
-		<Button android:id="@+id/poll_comment_button" android:gravity="center"
-			android:layout_width="wrap_content" android:text="留言"
-			android:layout_height="34dp" />
-	</LinearLayout>
+	<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" 
+		android:layout_alignParentRight="true" android:gravity="center" android:layout_marginTop="20sp"> 
+		<Button android:id="@+id/poll_like_button" android:gravity="center" android:layout_width="wrap_content" 
+		android:text="喜欢" android:layout_height="34dp" /> <TextView android:layout_height="wrap_content" 
+		android:textSize="20sp" android:text="宝贝评价" android:gravity="center" android:textColor="#FFFFFF" 
+		android:layout_width="wrap_content" android:layout_marginLeft="50sp" android:layout_marginRight="50sp" 
+		/> <Button android:id="@+id/poll_comment_button" android:gravity="center" 
+		android:layout_width="wrap_content" android:text="留言" android:layout_height="34dp" 
+		/> </LinearLayout> -->
+
+	<TextView android:layout_height="30sp" android:textColor="#FFFFFF"
+		android:textSize="20sp" android:text="宝贝预览" android:gravity="center"
+		android:layout_width="fill_parent" android:background="@drawable/topbck"
+		android:layout_marginTop="10sp" />
 
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="fill_parent" android:layout_height="fill_parent">

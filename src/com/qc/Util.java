@@ -22,13 +22,23 @@ public class Util {
     public static void launchNativeApp(Activity activity, String component, Bundle payload) {
         Intent intent = new Intent("android.intent.action.MAIN");
         intent.setComponent(ComponentName.unflattenFromString(component));
-        intent.addCategory("android.intent.category.LAUNCHER");
-
         if (payload != null) {
             intent.putExtras(payload);
         }
 
         activity.startActivity(intent);
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+    
+
+    public static void launchNativeApp(Activity activity, Class<?> activityClass,
+            Bundle payload) {
+        Intent intent = new Intent(activity, activityClass);
+        if (payload != null) {
+            intent.putExtras(payload);
+        }
+        activity.startActivity(intent);
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {

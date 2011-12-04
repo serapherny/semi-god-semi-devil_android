@@ -24,7 +24,7 @@ import com.qc.Util;
 public class CameraActivity extends Activity {
     // define the file-name to save photo taken by Camera activity
     String fileName = "muzhigirl.jpg";
-    
+
     // create parameters for Intent with filename
     ContentValues values;
     Button buttonTakePhoto;

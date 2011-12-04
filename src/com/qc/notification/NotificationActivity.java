@@ -21,6 +21,7 @@ import com.qc.MockUtil;
 import com.qc.R;
 import com.qc.Util;
 import com.qc.entity.Notification;
+import com.qc.square.CommentActivity;
 
 public class NotificationActivity extends ListActivity {
 
@@ -77,8 +78,8 @@ public class NotificationActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
         // Toast.makeText(this, "Click-" + String.valueOf(position),
         // Toast.LENGTH_SHORT).show();
-        Util.launchNativeApp((Activity) NotificationActivity.this,
-                "com.qc/com.qc.square.CommentActivity", createBundle(position));
+        Util.launchNativeApp((Activity) NotificationActivity.this, CommentActivity.class,
+                createBundle(position));
     }
 
     private Bundle createBundle(int position) {
