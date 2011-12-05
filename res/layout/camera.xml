@@ -29,7 +29,8 @@
         android:layout_width="280dp"
         android:layout_height="200dp"
         android:layout_marginLeft="22.5dp" >
-<!--  
+
+        <!--
         <Button
             android:id="@+id/firstPhotoButton"
             android:layout_width="fill_parent"
@@ -39,12 +40,14 @@
             android:textColor="#000000"
             android:textSize="24sp" >
         </Button>
--->
+        -->
+
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:scaleType="centerCrop" >
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus_add_green" >
         </ImageView>
     </FrameLayout>
 
@@ -53,7 +56,8 @@
         android:layout_width="280dp"
         android:layout_height="200dp"
         android:layout_marginLeft="22.5dp" >
-<!--  
+
+        <!--
         <Button
             android:id="@+id/secondPhotoButton"
             android:layout_width="fill_parent"
@@ -63,12 +67,14 @@
             android:textColor="#000000"
             android:textSize="24sp" >
         </Button>
--->
+        -->
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:scaleType="centerCrop" >
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus_add_green" >
         </ImageView>
     </FrameLayout>
 

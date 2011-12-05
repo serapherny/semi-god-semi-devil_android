@@ -78,7 +78,7 @@ public class NotificationActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
         // Toast.makeText(this, "Click-" + String.valueOf(position),
         // Toast.LENGTH_SHORT).show();
-        Util.launchNativeApp((Activity) NotificationActivity.this, CommentActivity.class,
+        Util.startActivity((Activity) NotificationActivity.this, CommentActivity.class,
                 createBundle(position));
     }
 

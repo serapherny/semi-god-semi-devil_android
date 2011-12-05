@@ -71,8 +71,10 @@ public class CameraActivity extends Activity {
 			switch (this.whichphoto) {
 			case 1: 
 				startActivityForResult(photoPickerIntent, PICK_FIRST_IMAGE_ACTIVITY_REQUESRT_CODE);
+				break;
 			case 2:
 				startActivityForResult(photoPickerIntent,PICK_SECOND_IMAGE_ACTIVITY_REQUESRT_CODE);
+				break;
 			}
 
 		}
@@ -91,6 +93,7 @@ public class CameraActivity extends Activity {
 			case 1:
 				values.put(Media.TITLE, FIRST_FILE_NAME);
 				values.put(Media.DESCRIPTION, "First image captured by the camera, muzhi");
+				break;
 			case 2:
 				values.put(Media.TITLE, SECOND_FILE_NAME);
 				values.put(Media.DESCRIPTION, "Second image captured by the camera, muzhi");
@@ -102,6 +105,7 @@ public class CameraActivity extends Activity {
 			switch (this.whichphoto) {
 			case 1:
 				startActivityForResult(intent, CAPTURE_FIRST_IMAGE_ACTIVITY_REQUEST_CODE);
+				break;
 			case 2:
 				startActivityForResult(intent, CAPTURE_SECOND_IMAGE_ACTIVITY_REQUEST_CODE);
 			}
@@ -170,6 +174,7 @@ public class CameraActivity extends Activity {
 						Toast.LENGTH_SHORT).show();
 			}
 			break;
+			
 		case CAPTURE_SECOND_IMAGE_ACTIVITY_REQUEST_CODE:
 			if (resultCode == RESULT_OK) {
 
@@ -178,6 +183,7 @@ public class CameraActivity extends Activity {
 			} else {
 
 			}
+			break;
 
 		case PICK_FIRST_IMAGE_ACTIVITY_REQUESRT_CODE:
 			if ((resultCode == RESULT_OK) && (data.getData() != null)) {
@@ -200,6 +206,8 @@ public class CameraActivity extends Activity {
 				Toast.makeText(this, "Image not been selected!",
 						Toast.LENGTH_SHORT).show();
 			}
+			break;
+			
 		case PICK_SECOND_IMAGE_ACTIVITY_REQUESRT_CODE:
 			if ((resultCode == RESULT_OK) && (data.getData() != null)) {
 				// resize the image size to 750 px (either width or height,

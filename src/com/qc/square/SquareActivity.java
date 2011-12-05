@@ -99,7 +99,7 @@ public class SquareActivity extends ListActivity {
                 holder.pollImg1.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Util.launchNativeApp((Activity) context,
+                        Util.startActivity((Activity) context,
                                 "com.qc/com.qc.imageswitcher.PollImageSwitcher",
                                 createBundleForPollImages(position, 0));
                     }
@@ -107,7 +107,7 @@ public class SquareActivity extends ListActivity {
                 holder.pollImg2.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Util.launchNativeApp((Activity) context,
+                        Util.startActivity((Activity) context,
                                 "com.qc/com.qc.imageswitcher.PollImageSwitcher",
                                 createBundleForPollImages(position, 1));
                     }
@@ -117,7 +117,7 @@ public class SquareActivity extends ListActivity {
                 holder.moreCommentButton.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Util.launchNativeApp((Activity) context,
+                        Util.startActivity((Activity) context,
                                 "com.qc/com.qc.square.CommentActivity",
                                 createBundleForMoreComments(position, 1));
                     }

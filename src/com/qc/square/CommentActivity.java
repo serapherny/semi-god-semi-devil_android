@@ -76,7 +76,7 @@ public class CommentActivity extends ListActivity {
 
             @Override
             public void onClick(View v) {
-                Util.launchNativeApp((Activity) CommentActivity.this,
+                Util.startActivity((Activity) CommentActivity.this,
                         "com.qc/com.qc.imageswitcher.PollImageSwitcher",
                         createBundleForPollImages(images, 0));
             }
@@ -86,7 +86,7 @@ public class CommentActivity extends ListActivity {
 
             @Override
             public void onClick(View v) {
-                Util.launchNativeApp((Activity) CommentActivity.this,
+                Util.startActivity((Activity) CommentActivity.this,
                         "com.qc/com.qc.imageswitcher.PollImageSwitcher",
                         createBundleForPollImages(images, 1));
             }
