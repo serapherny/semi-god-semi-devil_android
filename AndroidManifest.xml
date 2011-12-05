@@ -59,6 +59,11 @@
 			android:screenOrientation="portrait">
 		</activity>
 
+		<activity android:name=".login.LoginActivity" android:label="@string/app_name"
+			android:theme="@android:style/Theme.NoTitleBar"
+			android:screenOrientation="portrait">
+		</activity>
+
 		<activity android:name=".about.kube.Kube" android:label="@string/app_name"
 			android:theme="@android:style/Theme.NoTitleBar"
 			android:screenOrientation="portrait">

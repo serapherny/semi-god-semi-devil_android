@@ -10,6 +10,7 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TabHost;
 
 public class SemiPrototypeActivity extends TabActivity {
@@ -20,6 +21,15 @@ public class SemiPrototypeActivity extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // application setup
+        appSetup();
+
+        // activity setup
+        activitySetup();
+    }
+
+    private void activitySetup() {
         setContentView(R.layout.main);
 
         Resources res = getResources();
@@ -39,12 +49,16 @@ public class SemiPrototypeActivity extends TabActivity {
         tabHost.setCurrentTab(2);
     }
 
+    private void appSetup() {
+        Util.UDID = android.provider.Settings.System.getString(super.getContentResolver(),
+                android.provider.Settings.Secure.ANDROID_ID);
+    }
+
     private void addTabSpec(Class<?> cls, TabHost tabHost, Resources res, String name,
             String indicator, int drawableId) {
         Intent intent = new Intent().setClass(this, cls);
         TabHost.TabSpec spec = tabHost.newTabSpec(name)
-                .setIndicator(indicator, res.getDrawable(drawableId))
-                .setContent(intent);
+                .setIndicator(indicator, res.getDrawable(drawableId)).setContent(intent);
         tabHost.addTab(spec);
     }
 

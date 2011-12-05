@@ -26,7 +26,7 @@ public class FriendActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Util.launchNativeApp((Activity) FriendActivity.this,
+                Util.startActivity((Activity) FriendActivity.this,
                         "com.qc/com.qc.about.kube.Kube", null);
             }
         });

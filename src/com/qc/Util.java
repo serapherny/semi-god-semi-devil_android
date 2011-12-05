@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,7 +21,15 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class Util {
-    public static void launchNativeApp(Activity activity, String component, Bundle payload) {
+
+    /**
+     * The UDID of user device. Initialized in SemiPrototypeActivity.onCreate.
+     */
+    public static String UDID;
+
+    public static boolean isLogin = false;
+
+    public static void startActivity(Activity activity, String component, Bundle payload) {
         Intent intent = new Intent("android.intent.action.MAIN");
         intent.setComponent(ComponentName.unflattenFromString(component));
         if (payload != null) {
@@ -29,10 +39,8 @@ public class Util {
         activity.startActivity(intent);
         activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
-    
 
-    public static void launchNativeApp(Activity activity, Class<?> activityClass,
-            Bundle payload) {
+    public static void startActivity(Activity activity, Class<?> activityClass, Bundle payload) {
         Intent intent = new Intent(activity, activityClass);
         if (payload != null) {
             intent.putExtras(payload);
@@ -99,5 +107,16 @@ public class Util {
         imageView.setImageURI(null);
         imageView.setImageResource(0);
         System.gc();
+    }
+
+    public static void showDialog(Activity context, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message).setCancelable(false)
+                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        builder.show();
     }
 }
