@@ -144,11 +144,6 @@ public class CameraActivity extends Activity {
 				Toast.LENGTH_SHORT);
 		toast.show();
 		setContentView(R.layout.camera);
-//		buttonFirstPhoto = (Button) findViewById(R.id.firstPhotoButton);
-//		buttonSecondPhoto = (Button) findViewById(R.id.secondPhotoButton);
-	
-//		buttonFirstPhoto.setOnClickListener(new ButtonPhotoClicker(1));
-//		buttonSecondPhoto.setOnClickListener(new ButtonPhotoClicker(2));
 		
 		firstPhoto = (ImageView) findViewById(R.id.imageView1);
 		secondPhoto = (ImageView) findViewById(R.id.imageView2);

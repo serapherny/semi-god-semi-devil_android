@@ -23,18 +23,6 @@
         </TextView>
     </LinearLayout>
 
-    <!--
-        <Button
-            android:id="@+id/firstPhotoButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:text="点击上传一张照片"
-            android:textColor="#000000"
-            android:textSize="24sp" >
-        </Button>
-    -->
-
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="280dp"
@@ -44,18 +32,6 @@
         android:scaleType="centerInside"
         android:src="@drawable/plus_add_green" >
     </ImageView>
-
-    <!--
-        <Button
-            android:id="@+id/secondPhotoButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:text="点击上传另一张照片"
-            android:textColor="#000000"
-            android:textSize="24sp" >
-        </Button>
-    -->
 
     <ImageView
         android:id="@+id/imageView2"
