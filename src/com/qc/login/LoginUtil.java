@@ -24,9 +24,11 @@ public class LoginUtil {
     public void sendLoginRequest(String email, String password,
             final LoginResponseHanlder responseHanlder) {
         XMLRPCMethod method = new XMLRPCMethod("bind_user", new XMLRPCMethodCallback() {
+            @SuppressWarnings("unchecked")
             public void callFinished(Object result) {
+                Log.i("CLASS NAME", result.getClass().toString());
                 Log.i("login", "XML RPC response:" + result.toString());
-                responseHanlder.handle(result);
+                responseHanlder.handle((Map<String, String>) result);
             }
         });
         method.call(getParamBundle(email, password, null));
@@ -35,9 +37,10 @@ public class LoginUtil {
     public void sendSignupRequest(String email, String password, String nickname,
             final SignupResponseHanlder responseHanlder) {
         XMLRPCMethod method = new XMLRPCMethod("create_user", new XMLRPCMethodCallback() {
+            @SuppressWarnings("unchecked")
             public void callFinished(Object result) {
                 Log.i("bind user", "XML RPC response:" + result.toString());
-                responseHanlder.handle(result);
+                responseHanlder.handle((Map<String, String>) result);
             }
         });
         method.call(getParamBundle(email, password, nickname));

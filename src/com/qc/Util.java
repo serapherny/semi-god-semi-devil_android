@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import com.qc.login.LoginActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -109,12 +111,15 @@ public class Util {
         System.gc();
     }
 
-    public static void showDialog(Activity context, String message) {
+    public static void showDialog(Activity context, String message, final LoginActivity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message).setCancelable(false)
                 .setNegativeButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
+                        if (activity != null) {
+                            activity.finish();
+                        }
                     }
                 });
         builder.show();

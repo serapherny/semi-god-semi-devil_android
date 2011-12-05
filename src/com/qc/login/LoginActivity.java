@@ -1,5 +1,7 @@
 package com.qc.login;
 
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,39 +86,25 @@ public class LoginActivity extends Activity {
     }
 
     class SignupResponseHanlder {
-        public void handle(Object response) {
-            try {
-                JSONObject json = new JSONObject(response.toString());
-                String result = json.getString(ACTION_RESULT);
-                if (result.startsWith(FAILED)) {
-                    Util.showDialog(LoginActivity.this, "注册失败：" + result);
-                } else if (result.equals(SUCCESS)) {
-                    Util.isLogin = true;
-                    Util.showDialog(LoginActivity.this, "注册成功！");
-                }
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                Log.e("signup", "signup response unparsable.", e);
-                Util.showDialog(LoginActivity.this, "注册失败：" + e.getLocalizedMessage());
+        public void handle(Map<String, String> response) {
+            String result = response.get(ACTION_RESULT);
+            if (result.startsWith(FAILED)) {
+                Util.showDialog(LoginActivity.this, "注册失败：" + result, null);
+            } else if (result.equals(SUCCESS)) {
+                Util.isLogin = true;
+                Util.showDialog(LoginActivity.this, "注册成功！", LoginActivity.this);
             }
         }
     }
 
     class LoginResponseHanlder {
-        public void handle(Object response) {
-            try {
-                JSONObject json = new JSONObject(response.toString());
-                String result = json.getString(ACTION_RESULT);
-                if (result.startsWith(FAILED)) {
-                    Util.showDialog(LoginActivity.this, "登陆失败：" + result);
-                } else if (result.equals(SUCCESS)) {
-                    Util.isLogin = true;
-                    Util.showDialog(LoginActivity.this, "登陆成功！");
-                }
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                Log.e("login", "login response unparsable.", e);
-                Util.showDialog(LoginActivity.this, "登陆失败：" + e.getLocalizedMessage());
+        public void handle(Map<String, String> response) {
+            String result = response.get(ACTION_RESULT);
+            if (result.startsWith(FAILED)) {
+                Util.showDialog(LoginActivity.this, "登陆失败：" + result, null);
+            } else if (result.equals(SUCCESS)) {
+                Util.isLogin = true;
+                Util.showDialog(LoginActivity.this, "登陆成功！", LoginActivity.this);
             }
         }
     }

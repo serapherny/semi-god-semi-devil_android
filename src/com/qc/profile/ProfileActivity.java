@@ -15,21 +15,19 @@ public class ProfileActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!Util.isLogin) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("您还没注册，请问是否现在注册？").setCancelable(false)
-                    .setPositiveButton("注册", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Util.startActivity(ProfileActivity.this, LoginActivity.class, null);
-                        }
-                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            displayError();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("您还没注册，请问是否现在注册？").setCancelable(false)
+                .setPositiveButton("注册", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Util.startActivity(ProfileActivity.this, LoginActivity.class, null);
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        displayError();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
 
         displayUnfinished();
     }
