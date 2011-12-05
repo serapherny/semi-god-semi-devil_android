@@ -124,7 +124,7 @@ public class CameraActivity extends Activity {
 		public void onClick(View v) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
 			builder.setMessage("选择相册照片或拍照上传")
-			.setCancelable(false)
+			.setCancelable(true)
 			.setPositiveButton("拍照上传",
 					new ButtonTakePhotoClicker(this.whichphoto)
 					)
