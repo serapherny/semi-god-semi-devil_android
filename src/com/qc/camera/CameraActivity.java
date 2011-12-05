@@ -98,9 +98,9 @@ public class CameraActivity extends Activity {
 				values.put(Media.TITLE, SECOND_FILE_NAME);
 				values.put(Media.DESCRIPTION, "Second image captured by the camera, muzhi");
 			}
-			Uri uri = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI, values);
+		    //Uri uri = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI, values);
 			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-			intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+			//intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 			intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
 			switch (this.whichphoto) {
 			case 1:
@@ -124,7 +124,7 @@ public class CameraActivity extends Activity {
 		public void onClick(View v) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
 			builder.setMessage("选择相册照片或拍照上传")
-			.setCancelable(true)
+			.setCancelable(false)
 			.setPositiveButton("拍照上传",
 					new ButtonTakePhotoClicker(this.whichphoto)
 					)
@@ -144,7 +144,7 @@ public class CameraActivity extends Activity {
 				Toast.LENGTH_SHORT);
 		toast.show();
 		setContentView(R.layout.camera);
-		
+
 		firstPhoto = (ImageView) findViewById(R.id.imageView1);
 		secondPhoto = (ImageView) findViewById(R.id.imageView2);
 		firstPhoto.setClickable(true);
@@ -161,6 +161,19 @@ public class CameraActivity extends Activity {
 			if (resultCode == RESULT_OK) {
 				Toast.makeText(this, "photo taken ok", Toast.LENGTH_SHORT)
 				.show();
+				Bitmap bitmap;
+				try {
+					bitmap = Util.decodeFile(
+							new File(new URI(data.getDataString())), 750);
+					Log.i("photo size is ", "" + bitmap.getWidth() + " , "
+							+ bitmap.getHeight());
+					firstPhoto.setImageBitmap(bitmap);
+				} catch (URISyntaxException e) {
+					Toast.makeText(
+							this,
+							"Unable to locate or decode the image you selected.",
+							Toast.LENGTH_SHORT).show();
+				}
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Picture was not taken: result_canceled",
 						Toast.LENGTH_SHORT).show();
@@ -169,9 +182,22 @@ public class CameraActivity extends Activity {
 						Toast.LENGTH_SHORT).show();
 			}
 			break;
-			
+
 		case CAPTURE_SECOND_IMAGE_ACTIVITY_REQUEST_CODE:
-			if (resultCode == RESULT_OK) {
+			if ((resultCode == RESULT_OK) && (data.getData() != null)) {
+				Bitmap bitmap;
+				try {
+					bitmap = Util.decodeFile(
+							new File(new URI(data.getDataString())), 750);
+					Log.i("photo size is ", "" + bitmap.getWidth() + " , "
+							+ bitmap.getHeight());
+					secondPhoto.setImageBitmap(bitmap);
+				} catch (URISyntaxException e) {
+					Toast.makeText(
+							this,
+							"Unable to locate or decode the image you selected.",
+							Toast.LENGTH_SHORT).show();
+				}
 
 			} else if (resultCode == RESULT_CANCELED) {
 
@@ -202,7 +228,7 @@ public class CameraActivity extends Activity {
 						Toast.LENGTH_SHORT).show();
 			}
 			break;
-			
+
 		case PICK_SECOND_IMAGE_ACTIVITY_REQUESRT_CODE:
 			if ((resultCode == RESULT_OK) && (data.getData() != null)) {
 				// resize the image size to 750 px (either width or height,
