@@ -8,29 +8,21 @@
 		android:background="@drawable/topbck" android:gravity="center"
 		android:orientation="horizontal">
 
-		<RelativeLayout android:id="@+id/notificationList"
-			android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<Button android:id="@+id/photo_question" android:gravity="center"
+			android:layout_width="wrap_content" android:layout_marginRight="30dp"
+			android:layout_alignParentRight="true" android:text="填写提问"
+			android:layout_height="34dp"/>
 
-			<TextView android:id="@+id/buttonTakePhoto"
-				android:layout_width="wrap_content" android:layout_height="30dp"
-				android:textSize="20sp" android:layout_gravity="center"
-				android:text="照片选择" android:textColor="#FFFFFF">
-			</TextView>
+		<TextView android:id="@+id/buttonTakePhoto"
+			android:layout_width="wrap_content" android:layout_height="30dp"
+			android:textSize="20sp" android:layout_gravity="center" android:text="照片选择"
+			android:textColor="#FFFFFF">
+		</TextView>
 
-			<LinearLayout android:layout_width="fill_parent"
-				android:layout_height="40dp" android:background="@drawable/topbck"
-				android:gravity="center" android:orientation="horizontal">
-				<Button android:id="@+id/photo_question" android:gravity="center"
-					android:layout_width="wrap_content" android:layout_marginRight="30dp"
-					android:layout_alignParentRight="true" android:text="全部已读"
-					android:layout_height="34dp" android:visibility="gone" />
-
-				<Button android:id="@+id/photo_send" android:gravity="center"
-					android:layout_width="wrap_content" android:layout_marginLeft="30dp"
-					android:layout_alignParentRight="true" android:text="清空列表"
-					android:layout_height="34dp" android:visibility="gone" />
-			</LinearLayout>
-		</RelativeLayout>
+		<Button android:id="@+id/photo_send" android:gravity="center"
+			android:layout_width="wrap_content" android:layout_marginLeft="30dp"
+			android:layout_alignParentRight="true" android:text="提交发送"
+			android:layout_height="34dp"/>
 	</LinearLayout>
 
 	<ImageView android:id="@+id/imageView1" android:layout_width="280dp"
