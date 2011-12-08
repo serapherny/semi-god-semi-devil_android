@@ -23,4 +23,15 @@ public enum PhotoCategory {
     public String toString() {
         return this.text;
     }
+
+    public static String[] getAllCategories() {
+        PhotoCategory[] all = PhotoCategory.values();
+        String[] res = new String[all.length];
+
+        for (int i = 0; i < all.length; ++i) {
+            res[i] = all[i].toString();
+        }
+
+        return res;
+    }
 }

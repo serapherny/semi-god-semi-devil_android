@@ -1,12 +1,16 @@
 package com.qc.camera;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -17,6 +21,7 @@ import android.media.ExifInterface;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,22 +30,34 @@ import android.widget.Toast;
 
 import com.qc.R;
 import com.qc.Util;
+import com.qc.entity.PhotoCategory;
+import com.qc.login.RPCUtil;
 
 public class CameraActivity extends Activity {
-    // define the file-name to save photo taken by Camera activity
-    String FIRST_FILE_NAME = "muzhigirl1.jpg";
-    String SECOND_FILE_NAME = "muzhigirl2.jpg";
-
-    // create parameters for Intent with filename
-    ContentValues values;
-    Button buttonFirstPhoto;
-    Button buttonSecondPhoto;
-    ImageView firstPhoto;
-    ImageView secondPhoto;
     private static final int CAPTURE_FIRST_IMAGE_ACTIVITY_REQUEST_CODE = 0;
     private static final int PICK_FIRST_IMAGE_ACTIVITY_REQUESRT_CODE = 1;
     private static final int CAPTURE_SECOND_IMAGE_ACTIVITY_REQUEST_CODE = 2;
     private static final int PICK_SECOND_IMAGE_ACTIVITY_REQUESRT_CODE = 3;
+
+    // define the file-name to save photo taken by Camera activity
+    private static String FIRST_FILE_NAME = "muzhigirl1.jpg";
+    private static String SECOND_FILE_NAME = "muzhigirl2.jpg";
+    private static String[] VISIBILITIES = new String[] { "所有人", "仅好友可见" };
+
+    // create parameters for Intent with filename
+    ContentValues values;
+    Button photoQuestionButton;
+    Button photoSendButton;
+    ImageView firstPhoto;
+    ImageView secondPhoto;
+    ProgressDialog progressDialog;
+
+    // data for upload
+    private String description = "亲们，下面哪个比较好看一点？";
+    private String visibility = "";
+    private String category = "";
+    private Bitmap photo1 = null;
+    private Bitmap photo2 = null;
 
     @Override
     protected void onPause() {
@@ -133,7 +150,6 @@ public class CameraActivity extends Activity {
             AlertDialog alert = builder.create();
             alert.show();
         }
-
     }
 
     @Override
@@ -145,10 +161,90 @@ public class CameraActivity extends Activity {
 
         firstPhoto = (ImageView) findViewById(R.id.imageView1);
         secondPhoto = (ImageView) findViewById(R.id.imageView2);
+
+        setupButtons();
+
         firstPhoto.setClickable(true);
         secondPhoto.setClickable(true);
         firstPhoto.setOnClickListener(new ButtonPhotoClicker(1));
         secondPhoto.setOnClickListener(new ButtonPhotoClicker(2));
+    }
+
+    private void setupButtons() {
+        photoQuestionButton = (Button) findViewById(R.id.photo_question_button);
+        photoSendButton = (Button) findViewById(R.id.photo_send_button);
+
+        photoQuestionButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        photoSendButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final String[] items = PhotoCategory.getAllCategories();
+                Log.i("Camera", "" + items.length);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
+                builder.setTitle("请选择类别:");
+                builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        category = items[item];
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this)
+                                .setTitle("请选择求评价对象:");
+                        builder.setSingleChoiceItems(VISIBILITIES, -1,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int item) {
+                                        visibility = VISIBILITIES[item];
+                                        checkPoll();
+                                    }
+                                });
+                        builder.create().show();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+    }
+
+    private void checkPoll() {
+        // TODO Auto-generated method stub
+        AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
+        builder.setMessage("确定发送此评价吗？").setCancelable(false).setNegativeButton("取消", null)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendPoll();
+                    }
+                });
+        builder.create().show();
+    }
+
+    protected void sendPoll() {
+        // show the progress bar
+        progressDialog = ProgressDialog.show(CameraActivity.this, "", "上传中，请稍等...", true);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+
+        // assembly the poll data for sending
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("description", description);
+        map.put("visibility", visibility);
+        map.put("category", category);
+        map.put("photo1", convertPhoto(photo1));
+        map.put("photo2", convertPhoto(photo2));
+        new RPCUtil().sendPoll(map);
+    }
+
+    private String convertPhoto(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
     private Bitmap getRotatedBitmap() {
@@ -185,6 +281,7 @@ public class CameraActivity extends Activity {
                     original_bitmap.recycle();
                     original_bitmap = null;
                     firstPhoto.setImageBitmap(result_bitmap);
+                    photo1 = result_bitmap;
                 } catch (URISyntaxException e) {
                     Toast.makeText(this, "Unable to locate or decode the image you selected.",
                             Toast.LENGTH_SHORT).show();
@@ -204,6 +301,7 @@ public class CameraActivity extends Activity {
                     bitmap = Util.decodeFile(new File(new URI(data.getDataString())), 750);
                     Log.i("photo size is ", "" + bitmap.getWidth() + " , " + bitmap.getHeight());
                     secondPhoto.setImageBitmap(bitmap);
+                    photo2 = bitmap;
                 } catch (URISyntaxException e) {
                     Toast.makeText(this, "Unable to locate or decode the image you selected.",
                             Toast.LENGTH_SHORT).show();

@@ -8,7 +8,7 @@
 		android:background="@drawable/topbck" android:gravity="center"
 		android:orientation="horizontal">
 
-		<Button android:id="@+id/photo_question" android:gravity="center"
+		<Button android:id="@+id/photo_question_button" android:gravity="center"
 			android:layout_width="wrap_content" android:layout_marginRight="30dp"
 			android:layout_alignParentRight="true" android:text="填写提问"
 			android:layout_height="34dp"/>
@@ -19,7 +19,7 @@
 			android:textColor="#FFFFFF">
 		</TextView>
 
-		<Button android:id="@+id/photo_send" android:gravity="center"
+		<Button android:id="@+id/photo_send_button" android:gravity="center"
 			android:layout_width="wrap_content" android:layout_marginLeft="30dp"
 			android:layout_alignParentRight="true" android:text="提交发送"
 			android:layout_height="34dp"/>

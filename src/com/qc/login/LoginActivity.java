@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
                 String password = etPassword.getText().toString();
                 String nickname = etNickname.getText().toString();
 
-                new LoginUtil().sendSignupRequest(email, password, nickname,
+                new RPCUtil().sendSignupRequest(email, password, nickname,
                         new SignupResponseHanlder());
             }
         });
@@ -72,7 +72,7 @@ public class LoginActivity extends Activity {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
-                new LoginUtil().sendLoginRequest(email, password, new LoginResponseHanlder());
+                new RPCUtil().sendLoginRequest(email, password, new LoginResponseHanlder());
             }
         });
 

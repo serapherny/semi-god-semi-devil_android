@@ -15,11 +15,15 @@ import com.qc.xmlrpc.XMLRPCClient;
 import com.qc.xmlrpc.XMLRPCException;
 import com.qc.xmlrpc.XMLRPCFault;
 
-public class LoginUtil {
-    public static final String HOST = "http://192.168.19.73:10088/semi-god-semi-devil/rpcs/user_rpc";
+public class RPCUtil {
+    public static final String HOST = "http://192.168.19.17:10088/semi-god-semi-devil/rpcs/user_rpc";
     public static final String KEY = "semi-god-semi-devil-v0.1-acdjiac5tq-android";
 
     private XMLRPCClient client = new XMLRPCClient(HOST);
+    
+    public void sendPoll(Map<String, String> data) {
+        
+    }
 
     public void sendLoginRequest(String email, String password,
             final LoginResponseHanlder responseHanlder) {
