@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
@@ -153,7 +152,7 @@ public class CameraActivity extends Activity {
     }
 
     private Bitmap getRotatedBitmap() {
-
+        return null;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

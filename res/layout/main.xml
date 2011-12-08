@@ -10,10 +10,10 @@
 
 		<FrameLayout android:id="@android:id/tabcontent"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:padding="5dp" android:layout_weight="1" android:background="@drawable/mainbck" />
+			android:layout_weight="1" android:background="@drawable/mainbck" />
 
 		<TabWidget android:id="@android:id/tabs" android:background="@drawable/btnbck"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:layout_weight="0.7" />
+			android:layout_weight="0.485" />
 	</LinearLayout>
 </TabHost>
