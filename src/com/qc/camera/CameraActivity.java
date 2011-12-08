@@ -235,9 +235,31 @@ public class CameraActivity extends Activity {
         map.put("description", description);
         map.put("visibility", visibility);
         map.put("category", category);
-        map.put("photo1", convertPhoto(photo1));
-        map.put("photo2", convertPhoto(photo2));
-        new RPCUtil().sendPoll(map);
+        map.put("poll_type", "1");
+        if (photo1 == null) {
+            Log.i("CameraActivity", "No photo is selected!");
+            return;
+        }
+        map.put("photo_1", convertPhoto(photo1));
+        // map.put("photo_1", "123");
+        map.put("ext1", ".jpeg");
+        if (photo2 != null) {
+            map.put("photo_2", convertPhoto(photo2));
+            map.put("ext2", ".jpeg");
+        }
+        new RPCUtil().sendPoll(map, new PollResponseHanlder());
+    }
+
+    public class PollResponseHanlder {
+        public void handle(Map<String, String> response) {
+            progressDialog.cancel();
+            String result = response.get(Util.ACTION_RESULT);
+            if (result.startsWith(Util.FAILED)) {
+                Util.showDialog(CameraActivity.this, "上传评价失败：" + result, null);
+            } else if (result.equals(Util.SUCCESS)) {
+                Util.showDialog(CameraActivity.this, "上传评价成功！", CameraActivity.this);
+            }
+        }
     }
 
     private String convertPhoto(Bitmap bitmap) {
@@ -331,6 +353,7 @@ public class CameraActivity extends Activity {
                     }
                     Log.i("photo size is ", "" + bitmap.getWidth() + " , " + bitmap.getHeight());
                     firstPhoto.setImageBitmap(bitmap);
+                    photo1 = bitmap;
                 } catch (URISyntaxException e) {
                     Toast.makeText(this, "Unable to locate or decode the image you selected.",
                             Toast.LENGTH_SHORT).show();
@@ -349,6 +372,7 @@ public class CameraActivity extends Activity {
                     bitmap = Util.decodeFile(new File(new URI(data.getDataString())), 750);
                     Log.i("photo size is ", "" + bitmap.getWidth() + " , " + bitmap.getHeight());
                     secondPhoto.setImageBitmap(bitmap);
+                    photo2 = bitmap;
                 } catch (URISyntaxException e) {
                     Toast.makeText(this, "Unable to locate or decode the image you selected.",
                             Toast.LENGTH_SHORT).show();

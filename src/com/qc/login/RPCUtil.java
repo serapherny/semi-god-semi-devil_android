@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.qc.Util;
+import com.qc.camera.CameraActivity;
 import com.qc.login.LoginActivity.LoginResponseHanlder;
 import com.qc.login.LoginActivity.SignupResponseHanlder;
 import com.qc.xmlrpc.XMLRPCClient;
@@ -16,13 +17,26 @@ import com.qc.xmlrpc.XMLRPCException;
 import com.qc.xmlrpc.XMLRPCFault;
 
 public class RPCUtil {
-    public static final String HOST = "http://192.168.19.17:10088/semi-god-semi-devil/rpcs/user_rpc";
+    public static final String USER_HOST = "http://192.168.19.17:10088/semi-god-semi-devil/rpcs/poll_rpc";
+    public static final String POLL_HOST = "http://192.168.19.17:10088/semi-god-semi-devil/rpcs/poll_rpc";
     public static final String KEY = "semi-god-semi-devil-v0.1-acdjiac5tq-android";
 
-    private XMLRPCClient client = new XMLRPCClient(HOST);
-    
-    public void sendPoll(Map<String, String> data) {
-        
+    private XMLRPCClient client = new XMLRPCClient(POLL_HOST);
+
+    public void sendPoll(Map<String, String> data,
+            final CameraActivity.PollResponseHanlder responseHanlder) {
+        Log.i("RPCUtil", "in method [sendPoll]");
+        XMLRPCMethod method = new XMLRPCMethod("create_poll_with_upload",
+                new XMLRPCMethodCallback() {
+                    @SuppressWarnings("unchecked")
+                    public void callFinished(Object result) {
+                        Log.i("RPCUtil", "in method [callFinished]");
+                        Log.i("CLASS NAME", result.getClass().toString());
+                        Log.i("login", "XML RPC response:" + result.toString());
+                        responseHanlder.handle((Map<String, String>) result);
+                    }
+                });
+        method.call(getParamBundle(data));
     }
 
     public void sendLoginRequest(String email, String password,
@@ -48,6 +62,16 @@ public class RPCUtil {
             }
         });
         method.call(getParamBundle(email, password, nickname));
+    }
+
+    private static Object[] getParamBundle(Map<String, String> payload) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("UDID", Util.UDID);
+        map.put("KEY", KEY);
+        map.put("CONTENT", new HashMap<String, String>(payload));
+
+        Object[] param = { map };
+        return param;
     }
 
     private static Object[] getParamBundle(String email, String password, String nickname) {
@@ -88,7 +112,7 @@ public class RPCUtil {
         }
 
         public void call(Object[] params) {
-            Log.i("login", "Calling host " + HOST);
+            Log.i("login", "Calling host " + POLL_HOST);
             this.params = params;
             start();
         }
@@ -120,7 +144,7 @@ public class RPCUtil {
                         if (couse instanceof HttpHostConnectException) {
                             Log.i("login",
                                     "Cannot connect to "
-                                            + HOST
+                                            + POLL_HOST
                                             + "\nMake sure server.py on your development host is running !!!");
                         } else {
                             Log.i("login", "Error " + e.getMessage());

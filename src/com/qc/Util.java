@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import com.qc.login.LoginActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -23,6 +21,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class Util {
+
+    public static final String ACTION_RESULT = "action_result";
+    public static final String FAILED = "failed";
+    public static final String SUCCESS = "suc";
 
     /**
      * The UDID of user device. Initialized in SemiPrototypeActivity.onCreate.
@@ -111,7 +113,7 @@ public class Util {
         System.gc();
     }
 
-    public static void showDialog(Activity context, String message, final LoginActivity activity) {
+    public static void showDialog(Activity context, String message, final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message).setCancelable(false)
                 .setNegativeButton("确定", new DialogInterface.OnClickListener() {
